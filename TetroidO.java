@@ -49,4 +49,23 @@ public class TetroidO extends Shape {
         }
         return true;
     }
+
+    public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
+        hover(x, y);     
+        for (int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
+                    return true;  
+            }    
+        }
+        return false;
+    }
+
+    public double[] xArr() { 
+        return this.x;
+    }
+    
+    public double[] yArr() { 
+        return this.y;
+    }
 }

@@ -31,4 +31,7 @@ public abstract class Shape {
     public void rotate(char key) {}
     public boolean clicked(double x, double y) {return false;}
     public boolean inBounds(double x, double y, int gridX, int gridY) {return false;}
+    public boolean overLaps(double x, double y, double[] xTest, double[] yTest) {return false;}
+    public double[] xArr() {double[] x = null; return x;}
+    public double[] yArr() {double[] y = null; return y;}
 }

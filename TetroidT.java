@@ -1,6 +1,6 @@
 /**********************************************************************************
  *
- *  TODO: Update Hover() to accomodate the T tetroid block shape
+ *  TODO: Update Hover() and rotate() to accomodate the T tetroid block shape
  *              
  **********************************************************************************/
 import java.awt.Color;
@@ -19,17 +19,39 @@ public class TetroidT extends Shape {
     }
 
     public void hover(double x, double y) {
-        if (rotation == 0) {
-            for (int i = 0; i < 4; i++) {
-                this.x[i] = x + i;
-                this.y[i] = y;    
-            }
-        }
-        else {
-            for (int i = 0; i < 4; i++) {
-                this.x[i] = x;
-                this.y[i] = y + i;    
-            }
+        switch (rotation) {
+            case 0:
+                for (int i = 0; i < 3; i++) {
+                    this.x[i] = x + i;
+                    this.y[i] = y;    
+                }
+                this.x[3] = x + 1;
+                this.y[3] = y + 1;
+                break;
+            case 1:
+                for (int i = 0; i < 3; i++) {
+                    this.x[i] = x;
+                    this.y[i] = y - i;    
+                }
+                this.x[3] = x + 1;
+                this.y[3] = y - 1;
+                break;
+            case 2: 
+                for (int i = 0; i < 3; i++) {
+                    this.x[i] = x - i;
+                    this.y[i] = y;    
+                }
+                this.x[3] = x - 1;
+                this.y[3] = y - 1;
+                break;
+            case 3:
+                for (int i = 0; i < 3; i++) {
+                    this.x[i] = x;
+                    this.y[i] = y + i;    
+                }
+                this.x[3] = x - 1;
+                this.y[3] = y + 1;
+                break;
         }
         draw();
     }
@@ -41,7 +63,7 @@ public class TetroidT extends Shape {
     }
 
     public void rotate(char key) {
-        if (key == 32) rotation = (rotation + 1) % 2;
+        if (key == 32) rotation = (rotation + 1) % 4;
     }
 
     public boolean clicked(double x, double y) {      
@@ -59,5 +81,24 @@ public class TetroidT extends Shape {
                 return false;        
         }
         return true;
+    }
+
+    public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
+        hover(x, y);     
+        for (int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
+                    return true;  
+            }    
+        }
+        return false;
+    }
+
+    public double[] xArr() { 
+        return this.x;
+    }
+    
+    public double[] yArr() { 
+        return this.y;
     }
 }

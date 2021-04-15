@@ -23,7 +23,7 @@ public class TetroidS extends Shape {
             for (int i = 0; i < 2; i++) {
                 this.x[i] = x + i;
                 this.y[i] = y;  
-                this.x[i + 2] = x + 1+ i;
+                this.x[i + 2] = x + 1 + i;
                 this.y[i + 2] = y + 1;  
             }
         }
@@ -63,5 +63,24 @@ public class TetroidS extends Shape {
                 return false;        
         }
         return true;
+    }
+
+    public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
+        hover(x, y);     
+        for (int i = 0; i < 4; i++) {
+            for(int j = 0; j < 4; j++) {
+                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
+                    return true;  
+            }    
+        }
+        return false;
+    }
+
+    public double[] xArr() { 
+        return this.x;
+    }
+    
+    public double[] yArr() { 
+        return this.y;
     }
 }

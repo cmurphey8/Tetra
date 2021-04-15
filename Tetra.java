@@ -67,13 +67,22 @@ public class Tetra {
 
             if (StdDraw.isMousePressed() && !released) {
                 if (tetroids[index].inBounds(Math.floor(x), Math.floor(y), gridX, gridY)) {
-                    tetroids[index++].hover(Math.floor(x), Math.floor(y));
-                    tetroids[index] = null;
-    
-                    drawBackground(); 
-                    StdDraw.show(); 
-                    StdDraw.pause(200);
-                    released = true;    
+                    boolean conflict = false;
+                    for (int i = 0; i < index; i++) {
+                        System.out.println(i);
+                        if (tetroids[index].overLaps(Math.floor(x), Math.floor(y), tetroids[i].xArr(), tetroids[i].yArr())) {
+                            conflict = true;
+                        }  
+                    }
+                    if (!conflict) {
+                        tetroids[index++].hover(Math.floor(x), Math.floor(y));
+                        tetroids[index] = null;
+        
+                        drawBackground(); 
+                        StdDraw.show(); 
+                        StdDraw.pause(200);
+                        released = true;   
+                    }
                 }
             }
 
