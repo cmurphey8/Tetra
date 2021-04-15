@@ -11,24 +11,22 @@
  *  NOTE:   Up to 100 copy-blocks can be created, per the tetroids array initialization
  *          Copy-blocks may overlap with the current configuration - we'll worry about this later!
  * 
- *  GOAL:   Update all remaining Tetroid*.java files (L, T, Z) so that all tetroids
+ *  PART 1: Update all remaining Tetroid*.java files (L, T, Z) so that all tetroids
  *          initialize and rotate properly
+ *
+ *  PART 2: Complete the overLaps method in Shape.java to prevent blocks 
+ *          from stacking on top of one another
  * 
  *  DISCUSSION: Complete the form @ 
  *              (1) What is the significance of our abstract parent class not having a constructor?
  * 
- *              (2) Which methods do you suspect we could have removed from each Tetroid
- *                  child class if our parent was not abstract? 
+ *              (2) What is the significance of the abstract methods in our parent class?
  * 
- *                  [HINT: check in to method calls in both Tetra and in their own Tetra* class files]
+ *              (3) What do you notice about the roles of our parent and child classes
+ *                  for this problem compared to the Galaxy problem last week?
  * 
- *              (2.1)   For those child methods we cannot remove, what is different about them?
- *                      Would they still be usable as is?
- * 
- *              (3) What kinds of methods do you suspect we would need to add to our Shape
- *                  parent class if it were not abstract? 
- * 
- *                  [HINT: refer back to (2.1)]
+ *              (4) What are some conditions to look out for where an abstract parent class
+ *                  might be preferable to a standard parent class?
  * 
  *  EXTRA PRACTICE: Remove the abstract keyword from the Shape parent class 
  *                  and Redesign the program around this update

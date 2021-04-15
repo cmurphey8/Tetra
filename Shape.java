@@ -1,6 +1,7 @@
 /**********************************************************************************
  *
- *  cut abstract out to share more methods
+ *  Part 2: Complete the overLaps() method to prevent blocks from 
+ *          overlapping one another
  *              
  **********************************************************************************/
 
@@ -41,15 +42,13 @@ public abstract class Shape {
     }
 
     public boolean overLaps(double x0, double y0, double[] xTest, double[] yTest) {
-        hover(x0, y0);
-        x = getX();
-        y = getY();
-        for (int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if (x[i] == xTest[j] && y[i] == yTest[j]) 
-                    return true;  
-            }    
-        }
+        /* 
+            (1) update the current position of the selected Tetroid 
+                with the input data (x0, y0)
+
+            (2) return true if the current position of the selected block overlaps the 
+                block enocoded by xTest, yTest 
+        */
         return false;
     }
 
