@@ -9,13 +9,21 @@ import java.awt.Color;
 // abstract classes do not get constructors!
 public abstract class Shape {
 
-    public static void draw(double[] x, double[] y, Color C) {
+    private static double[] x;
+    private static double[] y;
+    private static Color C;
+    
+    public void draw() {
+        x = getX();
+        y = getY();
+        C = getC();
         for (int i = 0; i < 4; i++) {
-            drawSquare(x[i], y[i], C);           
+            drawSquare(x[i], y[i]);           
         }
     }
 
-    public static void drawSquare(double x, double y, Color C) {
+    public void drawSquare(double x, double y) {
+        C = getC();
         StdDraw.setPenColor(C);
         StdDraw.filledSquare(x + 0.5, y + 0.5, 0.5); 
 
@@ -32,7 +40,10 @@ public abstract class Shape {
         StdDraw.square(x + 0.5, y + 0.5, 0.3);   
     }
 
-    public static boolean overLaps(double[] x, double[] y, double[] xTest, double[] yTest) {
+    public boolean overLaps(double x0, double y0, double[] xTest, double[] yTest) {
+        hover(x0, y0);
+        x = getX();
+        y = getY();
         for (int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
                 if (x[i] == xTest[j] && y[i] == yTest[j]) 
@@ -42,7 +53,10 @@ public abstract class Shape {
         return false;
     }
 
-    public static boolean inBounds(double[] x, double[] y, int gridX, int gridY) {
+    public boolean inBounds(double x0, double y0, int gridX, int gridY) {
+        hover(x0, y0);
+        x = getX();
+        y = getY();
         for (int i = 0; i < 4; i++) {
             if (x[i] >= gridX || x[i] < 0 || y[i] >= gridY || y[i] < 0) 
                 return false;        
@@ -50,7 +64,9 @@ public abstract class Shape {
         return true;
     }
 
-    public static boolean clicked(double[] x, double[] y, double testX, double testY) {
+    public boolean clicked(double testX, double testY) {
+        x = getX();
+        y = getY();
         for (int i = 0; i < 4; i++) {
             if (x[i] == testX && y[i] == testY) 
                 return true;        
@@ -59,11 +75,8 @@ public abstract class Shape {
     }
 
     public abstract void hover(double x, double y);
-    public abstract void draw();
     public abstract void rotate(char key);
-    public abstract boolean clicked(double x, double y);
-    public abstract boolean inBounds(double x, double y, int gridX, int gridY);
-    public abstract boolean overLaps(double x, double y, double[] xTest, double[] yTest);
-    public abstract double[] xArr();
-    public abstract double[] yArr();
+    public abstract double[] getX();
+    public abstract double[] getY();
+    public abstract Color getC();
 }

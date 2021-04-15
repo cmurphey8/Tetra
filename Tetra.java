@@ -98,7 +98,7 @@ public class Tetra {
             // check for overlapping blocks before placing the selected block
             boolean conflict = false;
             for (int i = 0; i < index; i++) {
-                if (tetroids[index].overLaps(Math.floor(x), Math.floor(y), tetroids[i].xArr(), tetroids[i].yArr())) {
+                if (tetroids[index].overLaps(Math.floor(x), Math.floor(y), tetroids[i].getX(), tetroids[i].getY())) {
                     conflict = true;
                 }  
             }

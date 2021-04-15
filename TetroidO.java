@@ -33,33 +33,19 @@ public class TetroidO extends Shape {
 
     public void rotate(char key) {}
 
-    //******************************************************************
+        //******************************************************************
     //  ACCESSORS
     //*******************************************************************/
 
-    public void draw() {
-        draw(x, y, C);
-    }
-
-    public boolean clicked(double x, double y) {     
-        return clicked(this.x, this.y, x, y);
-    }
-
-    public boolean inBounds(double x, double y, int gridX, int gridY) { 
-        hover(x, y);     
-        return inBounds(this.x, this.y, gridX, gridY);
-    }
-
-    public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
-        hover(x, y);   
-        return overLaps(this.x, this.y, xTest, yTest);
-    }
-
-    public double[] xArr() { 
+    public double[] getX() { 
         return this.x;
     }
     
-    public double[] yArr() { 
+    public double[] getY() { 
         return this.y;
+    }
+
+    public Color getC(){
+        return this.C;
     }
 }
