@@ -9,7 +9,11 @@ public class TetroidT extends Shape {
     private double[] x;         // x position for blocks
     private double[] y;         // y position for blocks
     private int rotation;       // 3 phases total
-    Color C = StdDraw.MAGENTA;  // this tetroid color
+    private final Color C = StdDraw.MAGENTA;  // this tetroid color
+
+    //******************************************************************
+    //  CONSTRUCTORS
+    //*******************************************************************/
 
     public TetroidT(double x, double y) {
         this.x = new double[4];
@@ -18,80 +22,50 @@ public class TetroidT extends Shape {
         hover(x, y);
     }
 
+    //******************************************************************
+    //  MUTATORS
+    //*******************************************************************/
+
     public void hover(double x, double y) {
-        switch (rotation) {
-            case 0:
-                for (int i = 0; i < 3; i++) {
-                    this.x[i] = x + i;
-                    this.y[i] = y;    
-                }
-                this.x[3] = x + 1;
-                this.y[3] = y + 1;
-                break;
-            case 1:
-                for (int i = 0; i < 3; i++) {
-                    this.x[i] = x;
-                    this.y[i] = y - i;    
-                }
-                this.x[3] = x + 1;
-                this.y[3] = y - 1;
-                break;
-            case 2: 
-                for (int i = 0; i < 3; i++) {
-                    this.x[i] = x - i;
-                    this.y[i] = y;    
-                }
-                this.x[3] = x - 1;
-                this.y[3] = y - 1;
-                break;
-            case 3:
-                for (int i = 0; i < 3; i++) {
-                    this.x[i] = x;
-                    this.y[i] = y + i;    
-                }
-                this.x[3] = x - 1;
-                this.y[3] = y + 1;
-                break;
+        if (rotation == 0) {
+            for (int i = 0; i < 4; i++) {
+                this.x[i] = x + i;
+                this.y[i] = y;    
+            }
+        }
+        else {
+            for (int i = 0; i < 4; i++) {
+                this.x[i] = x;
+                this.y[i] = y + i;    
+            }
         }
         draw();
     }
 
-    public void draw() {
-        for (int i = 0; i < 4; i++) {
-            super.drawSquare(x[i], y[i], C);           
-        }
-    }
-
     public void rotate(char key) {
-        if (key == 32) rotation = (rotation + 1) % 4;
+        if (key == 32) rotation = (rotation + 1) % 2;
+    }
+  
+    //******************************************************************
+    //  ACCESSORS
+    //*******************************************************************/
+
+    public void draw() {
+        draw(x, y, C);
     }
 
-    public boolean clicked(double x, double y) {      
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] == x && this.y[i] == y) 
-                return true;        
-        }
-        return false;
+    public boolean clicked(double x, double y) {     
+        return clicked(this.x, this.y, x, y);
     }
 
     public boolean inBounds(double x, double y, int gridX, int gridY) { 
         hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] >= gridX || this.x[i] < 0 || this.y[i] >= gridY || this.y[i] < 0) 
-                return false;        
-        }
-        return true;
+        return inBounds(this.x, this.y, gridX, gridY);
     }
 
     public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
-        hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
-                    return true;  
-            }    
-        }
-        return false;
+        hover(x, y);   
+        return overLaps(this.x, this.y, xTest, yTest);
     }
 
     public double[] xArr() { 

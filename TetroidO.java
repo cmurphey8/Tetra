@@ -8,8 +8,12 @@ import java.awt.Color;
 public class TetroidO extends Shape {
     private double[] x;         // x position for blocks
     private double[] y;         // y position for blocks
-    Color C = StdDraw.YELLOW;   // this tetroid color
-                                // no rotation needed for this block
+    private final Color C = StdDraw.YELLOW;   // this tetroid color
+    // no rotation needed for this block
+
+    //******************************************************************
+    //  CONSTRUCTORS
+    //*******************************************************************/
 
     public TetroidO(double x, double y) {
         this.x = new double[4];
@@ -27,38 +31,28 @@ public class TetroidO extends Shape {
         draw();
     }
 
+    public void rotate(char key) {}
+
+    //******************************************************************
+    //  ACCESSORS
+    //*******************************************************************/
+
     public void draw() {
-        for (int i = 0; i < 4; i++) {
-            super.drawSquare(x[i], y[i], C);           
-        }
+        draw(x, y, C);
     }
 
-    public boolean clicked(double x, double y) {      
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] == x && this.y[i] == y) 
-                return true;        
-        }
-        return false;
+    public boolean clicked(double x, double y) {     
+        return clicked(this.x, this.y, x, y);
     }
 
     public boolean inBounds(double x, double y, int gridX, int gridY) { 
         hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] >= gridX || this.x[i] < 0 || this.y[i] >= gridY || this.y[i] < 0) 
-                return false;        
-        }
-        return true;
+        return inBounds(this.x, this.y, gridX, gridY);
     }
 
     public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
-        hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
-                    return true;  
-            }    
-        }
-        return false;
+        hover(x, y);   
+        return overLaps(this.x, this.y, xTest, yTest);
     }
 
     public double[] xArr() { 

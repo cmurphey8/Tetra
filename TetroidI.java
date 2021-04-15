@@ -9,7 +9,11 @@ public class TetroidI extends Shape {
     private double[] x;         // x position for blocks
     private double[] y;         // y position for blocks
     private int rotation;       // 2 phases total
-    Color C = StdDraw.CYAN;     // this tetroid color
+    private final Color C = StdDraw.CYAN;     // this tetroid color
+
+    //******************************************************************
+    //  CONSTRUCTORS
+    //*******************************************************************/
 
     public TetroidI(double x, double y) {
         this.x = new double[4];
@@ -17,6 +21,10 @@ public class TetroidI extends Shape {
         rotation = 0;
         hover(x, y);
     }
+
+    //******************************************************************
+    //  MUTATORS
+    //*******************************************************************/
 
     public void hover(double x, double y) {
         if (rotation == 0) {
@@ -34,42 +42,30 @@ public class TetroidI extends Shape {
         draw();
     }
 
-    public void draw() {
-        for (int i = 0; i < 4; i++) {
-            super.drawSquare(x[i], y[i], C);           
-        }
-    }
-
     public void rotate(char key) {
         if (key == 32) rotation = (rotation + 1) % 2;
     }
 
-    public boolean clicked(double x, double y) {      
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] == x && this.y[i] == y) 
-                return true;        
-        }
-        return false;
+    //******************************************************************
+    //  ACCESSORS
+    //*******************************************************************/
+
+    public void draw() {
+        draw(x, y, C);
+    }
+
+    public boolean clicked(double x, double y) {     
+        return clicked(this.x, this.y, x, y);
     }
 
     public boolean inBounds(double x, double y, int gridX, int gridY) { 
         hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            if (this.x[i] >= gridX || this.x[i] < 0 || this.y[i] >= gridY || this.y[i] < 0) 
-                return false;        
-        }
-        return true;
+        return inBounds(this.x, this.y, gridX, gridY);
     }
 
     public boolean overLaps(double x, double y, double[] xTest, double[] yTest) { 
-        hover(x, y);     
-        for (int i = 0; i < 4; i++) {
-            for(int j = 0; j < 4; j++) {
-                if (this.x[i] == xTest[j] && this.y[i] == yTest[j]) 
-                    return true;  
-            }    
-        }
-        return false;
+        hover(x, y);   
+        return overLaps(this.x, this.y, xTest, yTest);
     }
 
     public double[] xArr() { 
@@ -79,5 +75,4 @@ public class TetroidI extends Shape {
     public double[] yArr() { 
         return this.y;
     }
-
 }
