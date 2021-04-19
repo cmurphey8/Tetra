@@ -70,7 +70,7 @@ public class Tetra {
                 released = selected(x, y);
             }
 
-            // process key entries if objct IS selected
+            // process key entries if an object IS selected
             if (StdDraw.hasNextKeyTyped() && !released) {
                 tetroids[index].rotate(StdDraw.nextKeyTyped());
             }
@@ -80,7 +80,7 @@ public class Tetra {
                 released = unselected(x, y);
             }
 
-            // follow the mouse while an object is selected
+            // follow the mouse while an object IS selected
             if (!released) {
                 drawBackground(); 
                 tetroids[index].hover(x - 0.5, y - 0.5); 
