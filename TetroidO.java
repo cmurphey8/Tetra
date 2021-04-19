@@ -9,7 +9,7 @@ public class TetroidO extends Shape {
     private double[] x;         // x position for blocks
     private double[] y;         // y position for blocks
     private final Color C = StdDraw.YELLOW;   // this tetroid color
-    // no rotation needed for this block
+    // no rotation needed for this block -> Q. Why do we still have a rotate() method then?
 
     //******************************************************************
     //  CONSTRUCTORS
