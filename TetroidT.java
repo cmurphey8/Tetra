@@ -8,7 +8,7 @@ import java.awt.Color;
 public class TetroidT extends Shape {
     private double[] x;         // x position for blocks
     private double[] y;         // y position for blocks
-    private int rotation;       // 3 phases total
+    private int rotation;       // 4 phases total
     private final Color C = StdDraw.MAGENTA;  // this tetroid color
 
     //******************************************************************
